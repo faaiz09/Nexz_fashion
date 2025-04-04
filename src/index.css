@@ -36,9 +36,7 @@
 
     --radius: 0.5rem;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -48,27 +46,44 @@
       "rlig" 1,
       "calt" 1;
   }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-gothic;
+    @apply font-cinzel;
   }
 }
 
 @layer components {
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+
+  .font-eb-garamond {
+    font-family: 'EB Garamond', serif;
+  }
+
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-unifraktur {
+    font-family: 'UnifrakturMaguntia', cursive;
+  }
+
   .gothic-heading {
-    @apply font-gothic font-semibold tracking-wide;
+    @apply font-cinzel font-semibold tracking-wide;
   }
 
   .gothic-display {
-    @apply font-display tracking-wider;
+    @apply font-eb-garamond tracking-wider;
   }
 
   .gothic-card {
-    @apply bg-gray-900 border border-gray-800 rounded-md overflow-hidden shadow-md;
+    @apply bg-gothic-900 border border-gothic-800 rounded-md overflow-hidden shadow-md;
   }
 
   .gothic-button {
@@ -76,6 +91,6 @@
   }
 
   .gothic-input {
-    @apply bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500;
+    @apply bg-gothic-800 border-gothic-700 text-white placeholder:text-gothic-500 focus:border-purple-500 focus:ring-purple-500;
   }
 }

@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+import tailwindcssAnimate from 'tailwindcss-animate';
+
+export default {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -11,13 +13,8 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: "1rem",
+      padding: "2rem",
       screens: {
-        xs: "480px",
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
         "2xl": "1400px",
       },
     },
@@ -31,6 +28,19 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        gothic: {
+          50: '#f7f7f7',
+          100: '#e3e3e3',
+          200: '#c8c8c8',
+          300: '#a4a4a4',
+          400: '#818181',
+          500: '#666666',
+          600: '#515151',
+          700: '#434343',
+          800: '#383838',
+          900: '#1a1a1a',
+          950: '#0a0a0a',
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -58,19 +68,6 @@ module.exports = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },
-        gothic: {
-          50: "#f5f5f6",
-          100: "#e6e6e8",
-          200: "#c5c5cb",
-          300: "#a2a2ae",
-          400: "#7e7e91",
-          500: "#5d5d73",
-          600: "#4a4a5c",
-          700: "#3d3d4c",
-          800: "#33333f",
-          900: "#2c2c36",
-          950: "#18181c",
         },
         purple: {
           50: "#faf5ff",
@@ -106,12 +103,12 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
+          from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          to: { height: 0 },
         },
         "fade-in": {
           from: { opacity: 0 },
@@ -128,12 +125,7 @@ module.exports = {
         "fade-in": "fade-in 0.3s ease-in",
         "fade-out": "fade-out 0.3s ease-out",
       },
-      fontFamily: {
-        gothic: ["'Cinzel'", "'EB Garamond'", "serif"],
-        sans: ["'Inter'", "system-ui", "sans-serif"],
-        display: ["'UnifrakturMaguntia'", "cursive"],
-      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 };
