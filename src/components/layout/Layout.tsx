@@ -87,7 +87,7 @@ const Footer = () => {
           <div>
             <h3 className="font-cinzel text-xl mb-4">Customer Service</h3>
             <ul className="space-y-2">
-              <li><Link to="/shipping" className="text-gothic-300 hover:text-white transition">Shipping & Returns</Link></li>
+              <li><Link to="/shipping-returns" className="text-gothic-300 hover:text-white transition">Shipping & Returns</Link></li>
               <li><Link to="/faq" className="text-gothic-300 hover:text-white transition">FAQ</Link></li>
               <li><Link to="/size-guide" className="text-gothic-300 hover:text-white transition">Size Guide</Link></li>
               <li><Link to="/contact" className="text-gothic-300 hover:text-white transition">Contact Us</Link></li>

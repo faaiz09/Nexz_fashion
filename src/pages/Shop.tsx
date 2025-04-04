@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Filter, SortDesc, X, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '@/store/cartStore';
+import ExternalImage from '@/components/ExternalImage';
 
 interface Product {
   id: string;
@@ -55,7 +56,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Gothic Chain Necklace',
     price: 59.99,
     category: 'Accessories',
-    image: '/images/instagram-1.jpg',
+    image: 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=600',
     sizes: ['One Size'],
     colors: ['Silver', 'Black'],
   },
@@ -64,7 +65,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Raven Corset Top',
     price: 119.99,
     category: 'Tops',
-    image: '/images/instagram-2.jpg',
+    image: 'https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600',
     sizes: ['XS', 'S', 'M', 'L'],
     colors: ['Black', 'Red'],
   },
@@ -73,7 +74,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Eternal Night Boots',
     price: 179.99,
     category: 'Accessories',
-    image: '/images/instagram-3.jpg',
+    image: 'https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=600',
     sizes: ['36', '37', '38', '39', '40', '41', '42'],
     colors: ['Black'],
   },
@@ -82,7 +83,7 @@ const MOCK_PRODUCTS: Product[] = [
     name: 'Velvet Draped Skirt',
     price: 149.99,
     category: 'Bottoms',
-    image: '/images/instagram-4.jpg',
+    image: 'https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?auto=compress&cs=tinysrgb&w=600',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'Purple', 'Red'],
   },
@@ -311,11 +312,19 @@ const Shop = () => {
                 <div key={product.id} className="group">
                   <div className="relative overflow-hidden rounded-lg mb-4">
                     <Link to={`/product/${product.id}`}>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full aspect-[3/4] object-cover transition transform group-hover:scale-105"
-                      />
+                      {product.image.startsWith('http') ? (
+                        <ExternalImage
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full aspect-[3/4] object-cover transition transform group-hover:scale-105"
+                        />
+                      ) : (
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full aspect-[3/4] object-cover transition transform group-hover:scale-105"
+                        />
+                      )}
                     </Link>
                     <div className="absolute bottom-4 left-4 right-4 flex space-x-2">
                       <Link

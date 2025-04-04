@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
+import ExternalImage from '@/components/ExternalImage';
 
 const MOCK_PRODUCTS = [
   {
@@ -89,7 +90,7 @@ const Home = () => {
           <h2 className="font-cinzel text-4xl mb-12 text-center">Shop by Category</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: 'Dresses', image: '/images/category-dresses.jpg' },
+              { name: 'Dresses', image: 'https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=600' },
               { name: 'Accessories', image: '/images/category-accessories.jpg' },
               { name: 'Outerwear', image: '/images/category-outerwear.jpg' }
             ].map((category) => (
@@ -98,11 +99,19 @@ const Home = () => {
                 to={`/shop/${category.name.toLowerCase()}`}
                 className="group relative h-96 overflow-hidden rounded-lg"
               >
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover transition transform group-hover:scale-105"
-                />
+                {category.name === 'Dresses' ? (
+                  <ExternalImage
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover transition transform group-hover:scale-105"
+                  />
+                ) : (
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover transition transform group-hover:scale-105"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-gothic-950 to-transparent opacity-70" />
                 <div className="absolute bottom-8 left-8">
                   <h3 className="font-cinzel text-2xl mb-2">{category.name}</h3>
@@ -194,17 +203,32 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <h2 className="font-cinzel text-4xl mb-12 text-center">Follow Our Style</h2>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
+            {[
+              'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=600',
+              'https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600',
+              'https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=600',
+              'https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?auto=compress&cs=tinysrgb&w=600',
+              'https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=600',
+              '/images/instagram-6.jpg'
+            ].map((imgSrc, index) => (
               <a
-                key={item}
+                key={index}
                 href="#"
                 className="relative group aspect-square overflow-hidden"
               >
-                <img
-                  src={`/images/instagram-${item}.jpg`}
-                  alt={`Instagram Post ${item}`}
-                  className="w-full h-full object-cover"
-                />
+                {imgSrc.startsWith('http') ? (
+                  <ExternalImage
+                    src={imgSrc}
+                    alt={`Instagram Post ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={imgSrc}
+                    alt={`Instagram Post ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gothic-950 bg-opacity-0 group-hover:bg-opacity-50 transition flex items-center justify-center">
                   <span className="text-white opacity-0 group-hover:opacity-100 transition">
                     @nexzfashion

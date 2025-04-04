@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Minus, Plus, X, ArrowRight } from 'lucide-react';
+import { Minus, Plus, X, ArrowRight, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 
 const Cart = () => {
@@ -16,11 +16,14 @@ const Cart = () => {
   return (
     <div className="bg-gothic-950 text-white min-h-screen py-12">
       <div className="container mx-auto px-4">
-        <h1 className="font-cinzel text-4xl mb-8">Shopping Cart</h1>
+        <h1 className="font-cinzel text-4xl mb-2">Shopping Cart</h1>
+        <p className="text-gothic-300 mb-8">Review and modify your items before checkout</p>
 
         {items.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gothic-300 mb-6">Your cart is empty</p>
+          <div className="text-center py-12 bg-gothic-900 rounded-lg">
+            <ShoppingBag className="h-16 w-16 mx-auto text-gothic-500 mb-4" />
+            <h2 className="font-cinzel text-2xl mb-4">Your cart is empty</h2>
+            <p className="text-gothic-300 mb-6 max-w-md mx-auto">Looks like you haven't added any items to your cart yet. Continue shopping to find the perfect pieces for your wardrobe.</p>
             <Link
               to="/shop"
               className="inline-flex items-center bg-white text-gothic-950 px-8 py-3 rounded hover:bg-gothic-300 transition"
@@ -68,8 +71,9 @@ const Cart = () => {
                       <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-3">
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
                             className="w-8 h-8 border border-gothic-700 rounded flex items-center justify-center hover:border-white transition"
+                            disabled={item.quantity <= 1}
                           >
                             <Minus className="h-4 w-4" />
                           </button>
@@ -91,7 +95,7 @@ const Cart = () => {
 
             {/* Order Summary */}
             <div>
-              <div className="bg-gothic-900 rounded-lg p-6">
+              <div className="bg-gothic-900 rounded-lg p-6 sticky top-24">
                 <h2 className="font-cinzel text-2xl mb-6">Order Summary</h2>
                 <div className="space-y-4 text-gothic-300">
                   <div className="flex justify-between">
@@ -107,15 +111,12 @@ const Cart = () => {
                     <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
-                <button
-                  onClick={() => {
-                    // Implement checkout logic
-                    alert('Checkout functionality coming soon!');
-                  }}
-                  className="w-full bg-white text-gothic-950 py-3 rounded mt-6 hover:bg-gothic-300 transition"
+                <Link
+                  to="/checkout"
+                  className="w-full bg-white text-gothic-950 py-3 rounded mt-6 hover:bg-gothic-300 transition flex items-center justify-center"
                 >
                   Proceed to Checkout
-                </button>
+                </Link>
                 <Link
                   to="/shop"
                   className="block text-center text-gothic-300 hover:text-white mt-4 transition"
@@ -125,7 +126,7 @@ const Cart = () => {
               </div>
 
               {/* Promo Code */}
-              <div className="mt-6">
+              <div className="mt-6 bg-gothic-900 rounded-lg p-6">
                 <h3 className="font-cinzel text-lg mb-4">Promo Code</h3>
                 <form 
                   className="flex"
@@ -138,7 +139,7 @@ const Cart = () => {
                   <input
                     type="text"
                     placeholder="Enter code"
-                    className="flex-1 bg-gothic-900 text-white px-4 py-2 rounded-l focus:outline-none"
+                    className="flex-1 bg-gothic-800 text-white px-4 py-2 rounded-l focus:outline-none focus:ring-2 focus:ring-gothic-500"
                   />
                   <button
                     type="submit"
